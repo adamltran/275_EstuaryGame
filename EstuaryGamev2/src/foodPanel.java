@@ -27,16 +27,16 @@ public class foodPanel extends JPanel implements MouseListener, MouseMotionListe
 	    
 	    
 	public foodPanel() {
-		frame = new JFrame("View");                                    
+		frame = new JFrame("Who's Meal is it Anyways?");                                    
         frame.getContentPane().setLayout(new BorderLayout());                                          
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);           
         frame.setSize(200,200);        
         frame.setVisible(true);
         
-        label = new JLabel("text");
+        label = new JLabel("Select Difficulty");
         frame.getContentPane().add(label, BorderLayout.CENTER);
         
-        button = new JButton("Button");        
+        button = new JButton("Play");        
         frame.getContentPane().add(button, BorderLayout.SOUTH);        
     }
         

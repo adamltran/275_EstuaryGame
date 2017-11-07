@@ -57,10 +57,5 @@ public class Model {
 	public void displayEndOfGame() {
 		System.out.println("Game over. Final Score: " + score);
 	}
-	
-	public static void main(String[] args) {
-		Controller controller = new Controller(new Model(), new foodPanel());
-		(new Thread(controller)).start();
-	}
 
 }

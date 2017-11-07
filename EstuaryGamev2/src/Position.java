@@ -1,6 +1,9 @@
 /**
  * The {@code Position} class holds data and methods used for representing positions and calculating distances in the xy plane.
  *
+ *@author Adam Tran
+ *@author Joseph Gibson
+ *
  */
 public class Position{
     /**

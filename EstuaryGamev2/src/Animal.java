@@ -1,6 +1,9 @@
 /**
  *    The {@code Animal} class holds data and methods used for identifying animals and 
  *    determining if the user fed the animal the correct food.
+ *    
+ *    @author Timothy Louie
+ *    @author Garrett Lacurts
  */
 public class Animal extends Position implements Updatable{
     private eAnimal type;

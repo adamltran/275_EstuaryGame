@@ -1,5 +1,8 @@
 /**
  * This enum represents all animals, and their diets, that will be represented in this game.
+ * 
+ * @author Joseph Gibson
+ * 
  */
 public enum eAnimal {
     HORSESHOECRAB(new eFood[]{

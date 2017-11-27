@@ -1,10 +1,3 @@
-/**
- * The {@code Position} class holds data and methods used for representing positions and calculating distances in the xy plane.
- *
- *@author Adam Tran
- *@author Joseph Gibson
- *
- */
 public class Position{
     /**
      * The x component of {@code this} two dimensional position.
@@ -22,7 +15,7 @@ public class Position{
      * @param p a {@code Position}.
      * @return the distance between {@code this} and {@code p}.
      */
-    public double eclideanDistanceTo(Position p){
+    public double eclideanDiatanceTo(Position p){
         return euclideanDistance(this,p);
     }
     /**
@@ -40,7 +33,7 @@ public class Position{
      * @param p a {@code Position}.
      * @return the distance between {@code this} and {@code p}.
      */
-    public double manhattanDistanceTo(Position p){
+    public double manhattanDiatanceTo(Position p){
         return manhattanDistance(this,p);
     }
     /**
@@ -58,7 +51,7 @@ public class Position{
      * @param p a {@code Position}.
      * @return the distance between {@code this} and {@code p}.
      */
-    public double chebyshevDistanceTo(Position p){
+    public double chebyshevDiatanceTo(Position p){
         return chebyshevDistance(this,p);
     }
     /**

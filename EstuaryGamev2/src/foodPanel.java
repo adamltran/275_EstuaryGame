@@ -1,18 +1,20 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class foodPanel extends JPanel implements MouseListener, MouseMotionListener{
 	private int size = 50;
-	private int foodx = 210;
+	private int foodx = 175;
 	private int foody = 175;
 	
 	private int dragFromX = 0;
@@ -21,38 +23,22 @@ public class foodPanel extends JPanel implements MouseListener, MouseMotionListe
 	private boolean canDrag = false;
 	
 	
-	   private JFrame frame;
-	    private JLabel label;
-	    private JButton button;
-	    
-	    
+	final int frameCount = 10;
+	int picNum = 0;
+	
+	protected boolean gameOver = false;
+	
+	BufferedImage topLeft;
+	BufferedImage botRight;
+	BufferedImage foodPic;
+	
+	
 	public foodPanel() {
-		frame = new JFrame("Who's Meal is it Anyways?");                                    
-        frame.getContentPane().setLayout(new BorderLayout());                                          
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);           
-        frame.setSize(200,200);        
-        frame.setVisible(true);
-        
-        label = new JLabel("Select Difficulty");
-        frame.getContentPane().add(label, BorderLayout.CENTER);
-        
-        button = new JButton("Play");        
-        frame.getContentPane().add(button, BorderLayout.SOUTH);        
-    }
-        
-    public JButton getButton(){
-        return button;
-    }
-    
-    public void setText(String text){
-        label.setText(text);
-    }
-//		setForeground(Color.red);
-//		
-//		this.addMouseListener(this);
-//		this.addMouseMotionListener(this);
-//		
-//	}
+		
+		this.addMouseListener(this);
+		this.addMouseMotionListener(this);
+		
+	}
 	
 	public boolean checkFood() {
 		if (foodx == 75 && foody == 75)
@@ -61,12 +47,36 @@ public class foodPanel extends JPanel implements MouseListener, MouseMotionListe
 	}
 	
 	public void paintComponent(Graphics g) {
+		
+		
+		topLeft = createImage(new File("Animals/Fish_east_1.png"));
+		botRight = createImage(new File("Animals/Sonny stand west.png"));
+		foodPic = createImage(new File("Animals/apple_core.png"));
+		BufferedImage backg = createImage(new File("Background/underwater.png"));
+		
+		
 		super.paintComponent(g);
 		
-		g.fillOval(foodx, foody, size, size);
-		g.fillOval(75, 75, size, size);
-		g.fillRect(350, 300, size, size);
+		g.drawImage(backg, 0, 0, this);
+		g.drawImage(foodPic, foodx, foody, Color.blue, this);
+		g.drawImage(topLeft, 0, 0, Color.blue, this);
+		g.drawImage(botRight, 375, 325, Color.blue, this);
 	}
+	
+
+	
+	private BufferedImage createImage(File img){
+    	BufferedImage bufferedImage;
+    	try {
+    		bufferedImage = ImageIO.read(img);
+    		return bufferedImage;
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    	}
+    	return null;
+    	
+    }
+	
 	
 	public void mousePressed(MouseEvent e) {
 		int x = e.getX();
@@ -100,8 +110,9 @@ public class foodPanel extends JPanel implements MouseListener, MouseMotionListe
 			foody = Math.min(foody, getHeight() - size);
 			
 			
-			if(foodx <= 80 && foody <= 80) {
+			if(foodx <= 80 && foody <= 80 && gameOver == false) {
 				System.out.println("you win");
+				gameOver = true;
 			}
 				this.repaint();
 		}

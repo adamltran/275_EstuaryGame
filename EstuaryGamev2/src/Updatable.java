@@ -1,9 +1,6 @@
 /**
  * This interface enables any object which implements it to be able to be stepped forward
  * a finite amount of time. 
- * 
- *@author Zayne Johnson
- *@author Joseph Gibson
  */
 public interface Updatable{
     /**

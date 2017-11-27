@@ -1,4 +1,5 @@
 import java.awt.Color;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -23,7 +24,7 @@ public class foodPanel extends JPanel implements MouseListener, MouseMotionListe
 	private boolean canDrag = false;
 	
 	
-	final int frameCount = 10;
+	//final int frameCount = 10;
 	int picNum = 0;
 	
 	protected boolean gameOver = false;

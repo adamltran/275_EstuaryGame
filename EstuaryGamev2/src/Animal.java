@@ -39,4 +39,6 @@ public class Animal extends Position implements Updatable{
 //        Node body = new Rectangle(scale*1,scale*1,Color.RED);
 //        return body;
 //    }
+    
+    
 }

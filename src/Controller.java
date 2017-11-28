@@ -7,6 +7,11 @@ public class Controller implements Runnable {
 	public Controller(Model model, foodPanel view) {
 		this.model = model;
 		this.view = view;
+		
+		//temporary
+		model.writeScoreToFile("test");
+		model.writeScoreToFile("second");
+		model.readScoresFromFile();
 	}
 	
 	public void updateModel() {

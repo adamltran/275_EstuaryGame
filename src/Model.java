@@ -1,6 +1,10 @@
-import java.util.Arrays;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.List;
-import java.util.Random;
 
 public class Model {
 	
@@ -75,5 +79,29 @@ public class Model {
 		
 		
 	}
-
+	
+	public void writeScoreToFile(String name) {
+		try {
+			FileOutputStream fileOut = new FileOutputStream("Score/scores.ser");
+			ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+			objectOut.writeChars(name + ": " + score);
+			objectOut.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void readScoresFromFile() {
+		try {
+			FileInputStream fileIn = new FileInputStream("Score/scores.ser");
+			ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+			String scores = objectIn.readLine();
+			objectIn.close();
+			System.out.println(scores);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

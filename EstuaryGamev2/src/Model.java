@@ -3,7 +3,7 @@ import java.util.Map;
 public class Model {
 	
 	private Map<Animal, Position> animals;
-	private int score;
+	private int score; 
 	private int time;
 	private int strikes;
 	private int timesFed;

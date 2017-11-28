@@ -14,6 +14,7 @@ import java.awt.Toolkit;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import java.awt.FlowLayout;
 
 public class frame1 {
 
@@ -49,6 +50,7 @@ public class frame1 {
 			int frameHeight = 500;
 			JFrame frame = new JFrame("Who's Meal is it Anyway?");
 			frame.getContentPane().add(backg);
+			backg.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			frame.pack();
 			frame.setLocationRelativeTo(null);
@@ -56,6 +58,7 @@ public class frame1 {
 			frame.setBounds((int) screenSize.getWidth() - frameWidth, 0,
 					frameWidth, frameHeight);
 			frame.setVisible(true);
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -9,13 +9,19 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.awt.Dimension;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class foodPanel extends JPanel implements MouseListener, MouseMotionListener{
 	private int size = 50;
+	
+	public void setSize (int width, int height){}
+	public void setSize (java.awt.Dimension d){}
+	public void setLocationRelativeTo (java.awt.Component component){}
 	private int foodx = 175;
+	
 	private int foody = 175;
 	
 	private int dragFromX = 0;
@@ -54,11 +60,10 @@ public class foodPanel extends JPanel implements MouseListener, MouseMotionListe
 		botRight = createImage(new File("Animals/Sonny stand west.png"));
 		foodPic = createImage(new File("Animals/apple_core.png"));
 		BufferedImage backg = createImage(new File("Background/underwater.png"));
-		
-		
+				
 		super.paintComponent(g);
 		
-		g.drawImage(backg, 0, 0, this);
+		g.drawImage(backg, 0, 0, getWidth(), getHeight(), this);
 		g.drawImage(foodPic, foodx, foody, Color.blue, this);
 		g.drawImage(topLeft, 0, 0, Color.blue, this);
 		g.drawImage(botRight, 375, 325, Color.blue, this);

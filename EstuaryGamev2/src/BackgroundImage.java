@@ -14,7 +14,7 @@ public class BackgroundImage extends JComponent {
 	      try {
 	         image = ImageIO.read(new File("Background/Background_05.png"));
 	         // JLabel label = new JLabel(new ImageIcon(image));
-	         Difficulty backg = new Difficulty(image);
+	         Start backg = new Start(image);
 
 	         JFrame frame = new JFrame();
 	         frame.getContentPane().add(backg);

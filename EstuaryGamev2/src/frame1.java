@@ -22,14 +22,17 @@ public class frame1{
 		Controller controller = new Controller(new Model(), new foodPanel());
 		(new Thread(controller)).start();
 		
-		//title t = new title();
-		 java.awt.EventQueue.invokeLater(new Runnable() {
+		
+		
+		java.awt.EventQueue.invokeLater(new Runnable() {
 	         public void run() {
 	            createAndShowUI();
 	         }
 	      });
 		
-		/*//creating food
+		 
+		 
+		 /*//creating food
 		foodPanel food = new foodPanel();
 		
 		//creating frame
@@ -45,7 +48,7 @@ public class frame1{
 	      try {
 	         image = ImageIO.read(new File("Background/Background_05.png"));
 	         // JLabel label = new JLabel(new ImageIcon(image));
-	         Difficulty backg = new Difficulty(image);
+	         Start backg = new Start(image);
 
 	         JFrame frame = new JFrame("Who's Meal is it Anyway?");
 	         frame.getContentPane().add(backg);

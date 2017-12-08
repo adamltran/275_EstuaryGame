@@ -1,4 +1,4 @@
-package bogus;
+package mvc;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -7,7 +7,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
@@ -34,12 +33,8 @@ public class View extends JPanel implements MouseListener, MouseMotionListener, 
 
 	private Controller controller;
 
-	private BufferedImage topLeft = createImage(new File("Animals/Fish_east_1.png"));
-	private BufferedImage botRight = createImage(new File("Animals/Sonny stand west.png"));
-	private BufferedImage foodPic = createImage(new File("Animals/apple_core.png"));
 	private BufferedImage backg = createImage(new File("Background/underwater.png"));
 	private BufferedImage strike = createImage(new File("Background/red_x.png"));
-	private BufferedImage bubble = createImage(new File("Background/b1.png"));
 	private JLabel lblTimeLeft;
 	private JLabel lblScore;
 	private JLabel lblTutorialHint;
@@ -47,11 +42,7 @@ public class View extends JPanel implements MouseListener, MouseMotionListener, 
 	JLabel endlabel = new JLabel("That's it, the game is over!");
 	JLabel score = new JLabel("Score: ");
 	JButton again = new JButton("Play again to get a higher score?");
-	private JButton btnViewHighScores;
 	private boolean tutorial;
-	private boolean end;
-	
-	private Image image;
 	JButton start = new JButton("Start Game");
 	JLabel name = new JLabel("Whose Prey is it Anyway?");
 	JButton Easy = new JButton("Easy");
@@ -72,13 +63,18 @@ public class View extends JPanel implements MouseListener, MouseMotionListener, 
 			createImage(new File("Food/worm.png")) };
 
 
+	/**
+	 * Creates a new instance of {@code View} with the given controller, tutorial flag, and end flag.
+	 * 
+	 * @param controller a controller
+	 * @param tutorial a boolean representing whether or not this instance is a tutorial
+	 * @param end a boolean the end state
+	 */
 	public View(Controller controller, boolean tutorial, boolean end) {
 		this.addMouseListener(this);
 		this.addMouseMotionListener(this);
 		this.controller = controller;
 		this.tutorial = tutorial;
-		this.end = end;
-		
 		btnMainMenu = new JButton("Main Menu");
 		btnMainMenu.setFont(new Font("Tahoma", Font.BOLD, 25));
 		btnMainMenu.setPreferredSize(new Dimension(220, 75));
@@ -99,21 +95,14 @@ public class View extends JPanel implements MouseListener, MouseMotionListener, 
 		name.setFont(font);
 		name.setForeground(Color.GREEN);
 
-		this.image = image;
 		Component horizontalStrut3 = Box.createHorizontalStrut(70);
 		add(horizontalStrut3);
 		if (!tutorial && !end) {
 			lblTimeLeft = new JLabel("Time Left: ");
 			lblTimeLeft.setFont(new Font("Tahoma", Font.BOLD, 25));
 			add(lblTimeLeft);
-		}
-		
-		else{
-			
-			
-			
-			
-			
+		}else{
+				
 		}
 		
 		start.addActionListener(this);
@@ -138,7 +127,12 @@ public class View extends JPanel implements MouseListener, MouseMotionListener, 
 		}
 	}
 	
-
+	/**
+	 * Creates a {@code BufferedImage} from the given file.
+	 * 
+	 * @param img an image file
+	 * @return a BufferedImage
+	 */
 	private BufferedImage createImage(File img) {
 		BufferedImage bufferedImage;
 		try {
@@ -225,7 +219,6 @@ public class View extends JPanel implements MouseListener, MouseMotionListener, 
 				add(again, gbc_again);
 
 				again.addActionListener(this);
-;
 			}
 			lblScore.setText("Score: " + m.getScore());
 		}

@@ -1,4 +1,4 @@
-package bogus;
+package mvc;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,7 +15,7 @@ import game.Position;
 import game.eAnimal;
 
 public class Model {
-	
+
 	private boolean over;
 	private ArrayList<Animal> animals;
 	private ArrayList<eAnimal> typesOnScreen;
@@ -36,8 +36,14 @@ public class Model {
 	private Random x;
 	private Random y;
 
+	/**
+	 * Creates a new instance of {@code Model} with the given tutorial flag and difficulty value.
+	 * 
+	 * @param tutorial a boolean representing whether the newly created model represents a tutorial or not
+	 * @param difficulty an int representing the difficulty level
+	 */
 	public Model(boolean tutorial, int difficulty) {
-		
+
 		r1 = new Random();
 		r2 = new Random();
 		x = new Random();
@@ -56,7 +62,7 @@ public class Model {
 		if (difficulty == 1) {
 			makeNewAnimal();
 			makeNewAnimal();
-			
+
 		}
 		makeNewFood();
 		startTime = System.nanoTime();
@@ -65,19 +71,28 @@ public class Model {
 				sendFoodToCenter();
 			}
 		};
-		
+
 		centerFoodTimer = new Timer(1, sendFoodToCenterListener);
 	}
-	
+
+	/**
+	 * Sets the X and Y components representing the center of the screen to that of the given position.
+	 * 
+	 * @param position the desired position
+	 */
 	public void setCenterScreen(Position position) {
 		centerScreen.setX(position.getX());
 		centerScreen.setY(position.getY());
 	}
-	
+
+	/**
+	 * Replaces the current food with a new instance of {@code food} whose type is selected from the diet of
+	 * one of the {@code Animal} currently part of the game.
+	 */
 	private void makeNewFood(){
-		
+
 		int animalIndex = 0;
-		
+
 		if (animals.size() > 0) {
 			animalIndex = r1.nextInt(animals.size());
 			while(animalIndex == animals.size()) {
@@ -85,7 +100,7 @@ public class Model {
 			}
 		}
 		else {
-//			makeNewAnimal();
+			//			makeNewAnimal();
 			return;
 		}
 		int typeIndex = r2.nextInt(2);
@@ -94,12 +109,15 @@ public class Model {
 			setY(centerScreen.getY());
 		}};
 	}
-	
+
+	/**
+	 * Adds a new {@code Animal} to the game, ensuring that that animal is not already there.
+	 */
 	private void makeNewAnimal(){
-		
+
 		int xCoord = x.nextInt((1600 - 200) + 1) + 200;
 		int yCoord = y.nextInt((800 - 200) + 1) + 200;
-		
+
 		switch(r1.nextInt(5)){
 		case 0:
 			if (!typesOnScreen.contains(eAnimal.BLUECRAB))
@@ -160,7 +178,7 @@ public class Model {
 			}
 			else
 				makeNewAnimal();
-			
+
 			break;
 		default:
 			if (!typesOnScreen.contains(eAnimal.STRIPEDBASS))
@@ -177,6 +195,9 @@ public class Model {
 		}
 	}
 
+	/**
+	 * Updates the model moving the animals, keeping track of the time and the number of strikes, and determining the game over condition.
+	 */
 	public void update() {
 		for (Animal a : animals) {
 			a.move(difficulty);
@@ -194,16 +215,26 @@ public class Model {
 			if (numberOfStrikes >= 5)
 				numberOfStrikes = 0;
 		}
-			
+
 	}
 
+	/**
+	 * Calculates the time remaining and returns it.
+	 * 
+	 * @return the time remaining in seconds
+	 */
 	public long getTimeRemaining() {
 		if (difficulty == 0)
 			return 45 - (currentTime - startTime)/1000000000;
 		else
 			return 30 - (currentTime - startTime)/1000000000;
 	}
-	
+
+	/**
+	 * Sets the food's X and Y components to that of the MouseEvent.
+	 * 
+	 * @param e a MouseEvent representing the mouse position 
+	 */
 	public void moveFood(MouseEvent e){
 		if(foodGrabbed){
 			food.setX(e.getX());
@@ -211,6 +242,11 @@ public class Model {
 		}
 	}
 
+	/**
+	 * Determines if a given {@code MouseEvent} is close enough to the food to constitute a grab.
+	 * 
+	 * @param e a MouseEvent representing the mouse position 
+	 */
 	public void grabFood(MouseEvent e){
 		Position event = new Position();
 		event.setX(e.getX());
@@ -222,6 +258,9 @@ public class Model {
 		}
 	}
 
+	/**
+	 * Handles food-animal interaction, feeding the animals and adding new ones as needed.
+	 */
 	private void checkFood() {
 		Iterator<Animal> i = animals.iterator();
 		while (i.hasNext()) {
@@ -230,7 +269,7 @@ public class Model {
 				if(a.feed(food.getType())) {
 					typesOnScreen.remove(a.getType());
 					i.remove();
-					
+
 					score += 100;
 				}
 				else {
@@ -249,34 +288,38 @@ public class Model {
 			makeNewFood();
 		}
 	}
-	
+
+	/**
+	 * Moves the food toward the center of the screen (used to animate this event).
+	 */
 	public void sendFoodToCenter() {
-		
+
 		double distanceFromCenter = food.eclideanDistanceTo(centerScreen);
-		
+
 		if (distanceFromCenter > 5) {
 			double distanceFromCenterX = (centerScreen.getX() - food.getX());
 			double distanceFromCenterY = (centerScreen.getY() - food.getY());
 			double a = Math.atan2(distanceFromCenterY, distanceFromCenterX);
 			double dx = Math.cos(a) * 10;
 			double dy = Math.sin(a) * 10;
-			
+
 			food.setX(food.getX() + dx);
 			food.setY(food.getY() + dy);
 		}
 		else
 			centerFoodTimer.stop();
-		
+
 	}
-	
+
+	/**
+	 * Drops the food and calls {@code checkFood()}.
+	 */
 	public void dropFood(){
 		checkFood();
 		foodGrabbed = false;
 	}
 
 	public boolean isOver() {
-		
-		
 		return over;
 	}
 

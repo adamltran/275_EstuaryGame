@@ -1,4 +1,4 @@
-package bogus;
+package mvc;
 
 import javax.swing.JFrame;
 
@@ -15,8 +15,12 @@ public class Controller implements Runnable{
 	
 	private Model model;
 	private View view;
-	private Start menu;boolean end;
+	private Start menu;
+	boolean end;
 	
+	/**
+	 * Creates a new instance of {@code Controller}.
+	 */
 	public Controller() {
 		super();
 		this.view = new View(this, false, false);
@@ -24,10 +28,20 @@ public class Controller implements Runnable{
 		menu = new Start(this);
 	}
 	
+	/**
+	 * Sets the field {@code menu} to a new instance of {@code Start}.
+	 */
 	public void displayMenuScreen() {
 		menu = new Start(this);
 	}
 	
+	/**
+	 * Prepares and presents the game to be displayed, setting the fields {@code view} and {@code model} to new instances of 
+	 * {@code View} and {@code Model}, respectively.
+	 * 
+	 * @param tutorial a boolean representing whether the newly created game view is a tutorial or not
+	 * @param difficulty an int representing the difficulty level
+	 */
 	public void displayMainGameScreen(boolean tutorial, int difficulty) {
 		String diff = (difficulty == 0) ? "(Easy)" : "(Hard)";
 		
@@ -40,6 +54,9 @@ public class Controller implements Runnable{
 		f.setVisible(true);
 	}
 	
+	/**
+	 * Prepares and presents the tutorial.
+	 */
 	public void displayTutorialScreen() {
 		this.model = new Model(true, 0);
 		JFrame f = new JFrame("Whose Prey is it Anyway? (Tutorial)");
@@ -50,6 +67,9 @@ public class Controller implements Runnable{
 		
 	}
 	
+	/**
+	 * Prepares and presents the end screen.
+	 */
 	public void displayEndScreen() {
 		this.model = new Model(true, 0);
 		JFrame f = new JFrame("Whose Prey is it Anyway? (Tutorial)");
@@ -60,6 +80,9 @@ public class Controller implements Runnable{
 		
 	}
 
+	/**
+	 * Steps the {@code model} forward and repaints the {@code view}.
+	 */
 	private void tick() {
 		model.update();
 		view.repaint();
@@ -85,6 +108,11 @@ public class Controller implements Runnable{
 	public View getView() {
 		return view;
 	}
+
+	public Start getMenu() {
+		return menu;
+	}
+	
 	
 	
 	

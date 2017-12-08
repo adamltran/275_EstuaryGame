@@ -1,7 +1,6 @@
 package game;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -18,26 +17,20 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import bogus.Controller;
-import bogus.Model;
+import mvc.Controller;
+import mvc.Model;
 
 public class Tutorial extends JPanel implements MouseListener, MouseMotionListener, ActionListener {
 	
 	private Controller controller;
 	
-	private BufferedImage topLeft = createImage(new File("Animals/Fish_east_1.png"));
-	private BufferedImage botRight = createImage(new File("Animals/Sonny stand west.png"));
-	private BufferedImage foodPic = createImage(new File("Animals/apple_core.png"));
+
 	private BufferedImage backg = createImage(new File("Background/underwater.png"));
 	private BufferedImage strike = createImage(new File("Background/red_x.png"));
-	private JLabel lblTimeLeft;
-	private JLabel lblScore;
-
 	private BufferedImage[] animals = new BufferedImage[] { createImage(new File("Eaters/blueCrab.png")),
 			createImage(new File("Eaters/Harbor-Seal-2.png")), createImage(new File("Eaters/horseshoe.png")),
 			createImage(new File("Eaters/Stingray1_0.png")), createImage(new File("Eaters/stripedbass.png")), };
@@ -48,6 +41,11 @@ public class Tutorial extends JPanel implements MouseListener, MouseMotionListen
 			createImage(new File("Food/shrimp.png")), createImage(new File("Food/snail.png")),
 			createImage(new File("Food/worm.png")), };
 	
+	/**
+	 * Creates a new instance of {@code Tutorial} with the given controller.
+	 * 
+	 * @param controller a controller.
+	 */
 	public Tutorial(Controller controller) {
 		this.addMouseListener(this);
 		this.addMouseMotionListener(this);
@@ -58,6 +56,9 @@ public class Tutorial extends JPanel implements MouseListener, MouseMotionListen
 	
 	public class TutorialLayout extends JPanel {
 		
+		/**
+		 * Creates a new instance of {@code TutorailLayout}.
+		 */
 		public TutorialLayout() {
 		
 			this.setBounds(0, 0, WIDTH, HEIGHT);
@@ -174,6 +175,12 @@ public class Tutorial extends JPanel implements MouseListener, MouseMotionListen
 		}
 	}
 	
+	/**
+	 * Creates a {@code BufferedImage} from the given file.
+	 * 
+	 * @param img an image file
+	 * @return a BufferedImage
+	 */
 	private BufferedImage createImage(File img) {
 		BufferedImage bufferedImage;
 		try {

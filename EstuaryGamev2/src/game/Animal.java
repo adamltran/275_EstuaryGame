@@ -1,13 +1,12 @@
 package game;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 /**
  *    The {@code Animal} class holds data and methods used for identifying animals and 
  *    determining if the user fed the animal the correct food.
  */
-public class Animal extends Position implements Updatable{
+public class Animal extends Position{
     private eAnimal type;
     private Random r;
     private int randX;
@@ -48,11 +47,18 @@ public class Animal extends Position implements Updatable{
     	direction = newDirection;
     }
     
+    /**
+     * Randomly sets the position that the animal will stay near.
+     */
     private void resetRandomPosition() {
     	randX = r.nextInt((1650 - 150) + 1) + 150;
     	randY = r.nextInt((850 - 150) + 1) + 150;
     }
     
+    /**
+     * Moves the animal by a set speed based on the difficulty away from the random position.
+     * @param difficulty the difficulty of the game
+     */
     public void move(int difficulty) {
     	double speed = (difficulty == 0) ? 2.3 : 2.7;
     	
@@ -86,17 +92,4 @@ public class Animal extends Position implements Updatable{
     public eAnimal getType() {
 		return type;
 	}
-
-	@Override
-    public void update(double time) {
-    	
-    }
-
-//    @Override
-//    public Node render(double scale) {
-//        Node body = new Rectangle(scale*1,scale*1,Color.RED);
-//        return body;
-//    }
-    
-    
 }
